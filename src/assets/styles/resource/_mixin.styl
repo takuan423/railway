@@ -1,0 +1,52 @@
+// percentage
+per(val, baseVal)
+  percentage(val / baseVal)
+
+// viewport width
+vw(val, baseVal = $baseWidth)
+  ((val / baseVal) * 100)vw
+
+// media query
+lp()
+  @media $lp
+    {block}
+
+mp()
+  @media $mp
+    {block}
+
+pc()
+  @media $pc
+    {block}
+
+sp()
+  @media $sp
+    {block}
+
+port()
+  @media screen and (orientation: portrait)
+    {block}
+
+land()
+  @media screen and (orientation: landscape)
+    {block}
+
+// clearfix
+cf()
+  &:after
+    display block
+    clear both
+    content ''
+
+// no font element
+nofont()
+  font-size 0
+  line-height 0
+
+enter($duration = 0.3s)
+  +pc()
+    animation line-enter $duration $duration forwards cubic-bezier(0.785, 0.135, 0.15, 0.86)
+
+leave($duration = 0.3s)
+  +pc()
+    animation line-leave $duration forwards cubic-bezier(0.785, 0.135, 0.15, 0.86)

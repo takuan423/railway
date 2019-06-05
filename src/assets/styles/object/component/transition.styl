@@ -1,0 +1,21 @@
+.rectangle-enter-active,
+.rectangle-leave-active
+  transition transform .4s cubic-bezier(0.86, 0, 0.07, 1)
+
+.rectangle-enter-active
+  transform-origin left
+
+.rectangle-leave-active
+  transform-origin right
+
+.rectangle-enter,
+.rectangle-leave-to
+  transform scaleX(0)
+
+.page-fade-enter-active,
+.page-fade-leave-active
+  transition opacity .3s
+
+.page-fade-enter,
+.page-fade-leave-to
+  opacity 0
