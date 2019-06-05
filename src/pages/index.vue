@@ -1,14 +1,14 @@
 <template lang="pug">
-.railway
-  .railway__inner
-    .railway__button
-      nuxt-link(to="/test")
-        |test
+.p-railWay
+  .p-railWay__inner
+    SeelctButton
 </template>
 
 <script>
+import SeelctButton from '@/components/organisms/SelectButton/index.vue'
 export default {
   components: {
+    SeelctButton
   }
 }
 </script>
