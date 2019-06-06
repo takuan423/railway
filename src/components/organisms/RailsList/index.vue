@@ -61,6 +61,8 @@ export default {
 <style lang="stylus" scoped>
 select
   font-size 15px
+  +sp()
+    font-size 20px
 
 .o-railsList__list
   margin 20px auto
@@ -87,6 +89,8 @@ select
     border-bottom 10px solid transparent
   &:last-of-type::before
     display none
+  +sp()
+    width 80%
 
 .o-railsList__item__inner
   cursor pointer
