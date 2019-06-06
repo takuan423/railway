@@ -55,11 +55,11 @@ module.exports = {
   },
 
   router: {
-    base: '/raiolway-info/'
+    base: '/railway-info/'
   },
 
   generate:{
-    dir: './dist/htdocs/raiolway-info/',
+    dir: './dist/htdocs/railway-info/',
   },
 
   srcDir: 'src/',
