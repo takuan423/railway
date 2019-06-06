@@ -44,7 +44,7 @@ export default {
     },
     showMap(x, y, name) {
       const target = document.querySelectorAll(`[data-modal=${name}]`)[0]
-      const iframeMap = `<iframe src="http://maps.google.co.jp/maps?q=${name}駅&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="600" height="450"></iframe>`
+      const iframeMap = `<iframe src="http://maps.google.co.jp/maps?q=${name}駅&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="85%" height="50%"></iframe>`
       target.innerHTML = iframeMap
     }
   }
@@ -72,11 +72,20 @@ export default {
   height 100%
 
 .o-modal__content__iframe
-  position absolute
+  position fixed
+  max-width 1000px
+  width 100%
+  height 100%
   top 50%
   left 50%
   transform translate(-50%, -50%)
   z-index 1000
+  pointer-events none
+  >>> iframe
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
 
 .o-modal__content__background
   width 100%
