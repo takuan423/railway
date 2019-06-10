@@ -3,10 +3,11 @@
   select(v-model="selected" v-on:change="changeRail")
     option(v-for="(option, index) in options" :class="`${options[index].value}`")
       |{{options[index].value}}
-  ul.o-railsList__list
-    li.o-railsList__item(v-for="item in railsList")
-      .o-railsList__item__inner
-        Modal(:positionX="`${item.x}`" :positionY="`${item.y}`" :name="`${item.name}`")
+  transition(name="fade")
+    ul.o-railsList__list(v-if="show")
+      li.o-railsList__item(v-for="item in railsList")
+        .o-railsList__item__inner
+          Modal(:name="`${item.name}`")
 </template>
 
 <script>
@@ -30,7 +31,8 @@ export default {
         { text: 'JR埼京線', value: 'JR埼京線' },
         { text: 'JR宇都宮線', value: 'JR宇都宮線' }
       ],
-      railsList: []
+      railsList: [],
+      show: false
     }
   },
   methods: {
@@ -39,6 +41,7 @@ export default {
       const val = encodeURI(e.target.value)
       const root = 'http://express.heartrails.com/api/json?method=getStations&line='
       this.railsList = []
+      this.show = false
       Vue.jsonp(root + val).then((json) => {
         const array = json.response.station
         for (let i = 0; i < array.length; i++) {
@@ -52,6 +55,7 @@ export default {
       for (let i = 0; i < railsAry.length; i++) {
         const element = railsAry[i]
         this.railsList.push(element)
+        this.show = true
       }
     }
   }

@@ -1,11 +1,13 @@
 <template lang="pug">
 .o-modal
-  a.o-modal__button(v-on:click="openModal" :data-positionX="`${positionY}`" :data-positionY="`${positionY}`" :data-name="`${name}`")
+  a.o-modal__button(v-on:click="openModal" :data-name="`${name}`")
     |{{name}}
-  .o-modal__content(:style="`display:${switchModal}`")
-    .o-modal__content__inner
-      .o-modal__content__iframe(:data-modal="`${name}`")
-      .o-modal__content__background(v-on:click="closeModal")
+  transition(name="fade")
+    .o-modal__content(v-if="show")
+      .o-modal__content__inner
+        .o-modal__content__iframe
+          iframe(:src="`http://maps.google.co.jp/maps?q=${name}?&output=embed&t=m&z=16&hl=ja`", frameborder="0", scrolling="no", width="75%", height="70%")
+        .o-modal__content__background(v-on:click="closeModal")
 </template>
 
 <script>
@@ -13,14 +15,6 @@ export default {
   components: {
   },
   props: {
-    positionX: {
-      type: String,
-      required: true
-    },
-    positionY: {
-      type: String,
-      required: true
-    },
     name: {
       type: String,
       required: true
@@ -28,24 +22,16 @@ export default {
   },
   data() {
     return {
-      switchModal: 'none'
+      switchModal: 'none',
+      show: false
     }
   },
   methods: {
     openModal(e) {
-      const posX = e.target.getAttribute('data-positionx')
-      const posY = e.target.getAttribute('data-positiony')
-      const name = e.target.getAttribute('data-name')
-      this.switchModal = 'block'
-      this.showMap(posX, posY, name)
+      this.show = true
     },
     closeModal() {
-      this.switchModal = 'none'
-    },
-    showMap(x, y, name) {
-      const target = document.querySelectorAll(`[data-modal=${name}]`)[0]
-      const iframeMap = `<iframe src="http://maps.google.co.jp/maps?q=${name}駅&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="85%" height="50%"></iframe>`
-      target.innerHTML = iframeMap
+      this.show = false
     }
   }
 }
@@ -57,7 +43,7 @@ export default {
   padding 5px
 
 .o-modal__content
-  display none
+  display block
   position fixed
   top 0
   left 0
